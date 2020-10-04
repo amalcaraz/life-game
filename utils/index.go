@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"runtime"
@@ -32,6 +33,8 @@ func ClearConsole() {
 	value, ok := clear[runtime.GOOS]
 	if ok {
 		value()
+		// Note: Clear the terminal bufer
+		fmt.Print("\033[3J\033[;H")
 	} else {
 		panic("Your platform (" + runtime.GOOS + ") is unsupported! I can't clear terminal screen :(")
 	}
