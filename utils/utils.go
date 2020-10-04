@@ -8,25 +8,23 @@ import (
 
 var clear map[string]func()
 
-func Init() {
-	clear = make(map[string]func())
-
-	clear["linux"] = func() {
-		cmd := exec.Command("clear")
-		cmd.Stdout = os.Stdout
-		cmd.Run()
-	}
-
-	clear["darwin"] = func() {
-		cmd := exec.Command("clear")
-		cmd.Stdout = os.Stdout
-		cmd.Run()
-	}
-
-	clear["windows"] = func() {
-		cmd := exec.Command("cmd", "/c", "cls")
-		cmd.Stdout = os.Stdout
-		cmd.Run()
+func init() {
+	clear = map[string]func(){
+		"linux": func() {
+			cmd := exec.Command("clear")
+			cmd.Stdout = os.Stdout
+			cmd.Run()
+		},
+		"darwin": func() {
+			cmd := exec.Command("clear")
+			cmd.Stdout = os.Stdout
+			cmd.Run()
+		},
+		"windows": func() {
+			cmd := exec.Command("cmd", "/c", "cls")
+			cmd.Stdout = os.Stdout
+			cmd.Run()
+		},
 	}
 }
 
